@@ -1,6 +1,10 @@
 namespace SpriteKind {
     export const Prop = SpriteKind.create()
 }
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This is a control block, it is what makes sure your button inputs mean something. When the B button is pressed, the game checks if the red fly sprite is overlapping with the red circle sprite, if it is, the grabbing animation plays, and you gain 1 point. If it isn't, the frog plays a mad animation and you do not gain a point.
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         ...........................2
@@ -37,7 +41,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         info.changeScoreBy(1)
         redFly.destroy()
     } else {
-        music.powerDown.play()
         mySprite.setImage(img`
             ..................................................
             ..................................................
@@ -72,6 +75,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(500)
     mySprite.setImage(assets.image`Hero`)
 })
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This is a control block, it is what makes sure your button inputs mean something. When the A button is pressed, the game checks if the blue fly sprite is overlapping with the blue circle sprite, if it is, the grabbing animation plays, and you gain 1 point. If it isn't, the frog plays a mad animation and you do not gain a point.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         9...........................
@@ -108,7 +115,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         info.changeScoreBy(1)
         blueFly.destroy()
     } else {
-        music.powerDown.play()
         mySprite.setImage(img`
             ..................................................
             ..................................................
@@ -143,6 +149,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(500)
     mySprite.setImage(assets.image`Hero`)
 })
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This block activates at the very end of the game, when the countdown ends.
 info.onCountdownEnd(function () {
     mySprite.startEffect(effects.confetti)
     pause(500)
@@ -156,6 +166,11 @@ info.onCountdownEnd(function () {
         game.splash("Grade: D :(")
     }
 })
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This block of code dictates the initial steps that make the game work. It sets the background, splashes the controls and starts the timer. It also creates the sprites for the player, and the 2 circles, and sets their proper positions.
+// 
 let blueFly: Sprite = null
 let redFly: Sprite = null
 let redCircle: Sprite = null
@@ -336,39 +351,14 @@ redCircle = sprites.create(img`
     bbbbbd222222222bbbbbdb
     `, SpriteKind.Enemy)
 redCircle.setPosition(127, 50)
-game.onUpdateInterval(5000, function () {
-    blueFly = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 . 1 . 1 . . . . . 
-        . . . . . 1 . 1 . 1 . 1 . . . . 
-        . . . . . 8 1 8 1 8 1 . . . . . 
-        . . . . 8 . 8 1 8 1 8 . . . . . 
-        . . . 8 8 8 8 8 8 8 8 8 . . . . 
-        . . . 8 8 8 8 8 8 8 8 8 8 . . . 
-        . . . 8 8 8 8 8 8 8 8 8 . . . . 
-        . . . . 8 . 8 1 8 1 8 . . . . . 
-        . . . . . 8 1 8 1 8 1 . . . . . 
-        . . . . . 1 . 1 . 1 . 1 . . . . 
-        . . . . . . 1 . 1 . 1 . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Projectile)
-    blueFly.setPosition(34, 95)
-    blueFly.setVelocity(0, -50)
-})
-game.onUpdateInterval(6200, function () {
-    redFly = sprites.create(assets.image`Bouncer`, SpriteKind.Food)
-    redFly.setPosition(127, 95)
-    redFly.setVelocity(0, -50)
-})
 game.onUpdateInterval(1500, function () {
-    redFly = sprites.create(assets.image`Bouncer`, SpriteKind.Food)
-    redFly.setPosition(127, 95)
-    redFly.setVelocity(0, -50)
+	
 })
-game.onUpdateInterval(3000, function () {
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This block of code is a loop, it is what makes sure the flies are constantly respawning and that they travel upwards for the entire duration of the timer.
+forever(function () {
     blueFly = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -389,4 +379,36 @@ game.onUpdateInterval(3000, function () {
         `, SpriteKind.Player)
     blueFly.setPosition(34, 95)
     blueFly.setVelocity(0, -50)
+    pause(1000)
+    blueFly = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 1 . 1 . 1 . . . . . 
+        . . . . . 1 . 1 . 1 . 1 . . . . 
+        . . . . . 8 1 8 1 8 1 . . . . . 
+        . . . . 8 . 8 1 8 1 8 . . . . . 
+        . . . 8 8 8 8 8 8 8 8 8 . . . . 
+        . . . 8 8 8 8 8 8 8 8 8 8 . . . 
+        . . . 8 8 8 8 8 8 8 8 8 . . . . 
+        . . . . 8 . 8 1 8 1 8 . . . . . 
+        . . . . . 8 1 8 1 8 1 . . . . . 
+        . . . . . 1 . 1 . 1 . 1 . . . . 
+        . . . . . . 1 . 1 . 1 . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile)
+    blueFly.setPosition(34, 95)
+    blueFly.setVelocity(0, -50)
+    pause(1838)
+    redFly = sprites.create(assets.image`Bouncer`, SpriteKind.Food)
+    redFly.setPosition(127, 95)
+    redFly.setVelocity(0, -52)
+})
+// Created By: Alex James
+// Created on: Jan 13th, 2023
+// 
+// This loop is what keeps the music going for the entire game.
+forever(function () {
+    music.playMelody("B A G A G F A C5 ", 120)
 })
